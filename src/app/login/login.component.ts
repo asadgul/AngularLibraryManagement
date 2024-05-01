@@ -35,8 +35,10 @@ export class LoginComponent  {
     };
     this.api.LoginUser(loginInfo).subscribe({
       next:(resp:any)=>{
-        if(resp.toString()==='Invalid'){
-          this.responseMsg='Invalid'
+        console.log('resp is'+resp)
+    //    debugger;
+        if(resp=='Invalid'){
+          this.responseMsg='Invalid Email or Password';
         }
         else{
           this.responseMsg='';
