@@ -6,7 +6,7 @@
     </button>
 </mat-form-field>
 <mat-card>
-    <mat-card-content>Showing Result For 10 Books</mat-card-content>
+    <mat-card-content>Showing Result For {{getBookCount()}} Books</mat-card-content>
 </mat-card>
 <mat-accordion multi="true">
     <mat-expansion-panel expanded *ngFor="let list of booksToDisplay">
@@ -50,8 +50,7 @@
                 <th mat-header-cell *matHeaderCellDef> Order </th>
                 <td mat-cell *matCellDef="let element">
                     <button mat-raised-button color="accent" (click)="OrderBook(element)"
-                    [disabled]="!element.available"
-                           
+                    [disabled]="!element.available"                           
 >
                         Order
                     </button>

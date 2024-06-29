@@ -36,14 +36,18 @@ export class ManageBooksComponent implements OnInit {
     };
     this.api.InsertBook(book).subscribe({
       next: (res: any) => {
-        console.log('respo '+res)
-        this.addMsg = res;//'Book Inserted';
+        console.log('respo '+res)       
         setInterval(() => (this.addMsg = ''), 5000);
-        this.Title.setValue('');
-        this.Author.setValue('');
-        this.Category.setValue('');
-        this.Subcategory.setValue('');
-        this.Price.setValue('');
+        debugger
+        if(res==='Book Inserted'){
+          this.addMsg = 'New Book Has been added';
+          this.Title.setValue('');
+          this.Author.setValue('');
+          this.Category.setValue('');
+          this.Subcategory.setValue('');
+          this.Price.setValue('');
+  
+        }
       },
       error: (err: any) => console.log(err),
     });

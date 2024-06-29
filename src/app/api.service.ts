@@ -52,7 +52,7 @@ export class ApiService {
       return this.http.get<Book[]>(this.baseurl+'GetAllBooks');
     }
     orderBook(userId:Number,bookId:number){
-      return this.http.post(this.baseurl+'OrderBooks/'+userId+'/'+bookId,{responseType:'text'});
+      return this.http.get(this.baseurl+'OrderBooks/'+userId+'/'+bookId,{responseType:'text'});
     }
     getOrder(userId:number){
       return this.http.get<Order[]>(this.baseurl+'GetOrder/'+userId);

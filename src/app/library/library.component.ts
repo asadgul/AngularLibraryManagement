@@ -23,29 +23,25 @@ export class LibraryComponent implements OnInit {
 
   search(value:string){
     this.updateList();
-    value=value.toLowerCase ();
+    value=value.toLowerCase ().trim();
     if(value.length>0){
       this.booksToDisplay=this.booksToDisplay.filter((categorybook)=>{
-        categorybook.books=categorybook.books.filter((book)=>{
+        categorybook.books=categorybook.books.filter((book)=>
           book.title.toLowerCase().includes(value)||
           book.author.toLowerCase().includes(value)
-        });
-
+      );
         return categorybook.books.length>0;
-      });
-      
+      });      
     }
-
   }
   OrderBook(book:Book){
     this.api.orderBook(this.api.getUserToken()?.id??0,book.id).subscribe({
       next:(resp:any)=>{
-        book.available=false;
-
-        // if(resp==='Success'){
-        // }
+        if(resp==='Success'){
+          book.available=false;
+        }
       },error:(err:any)=>{
-
+        console.log('error'+err);
       }
     });
   }
@@ -81,14 +77,17 @@ export class LibraryComponent implements OnInit {
           } 
         }
       }
-      else{
+     else{
         this.booksToDisplay.push({
           category:book.category,
           subCategory:book.subCategory,
           books:[book],
         });
       }
-    }
+   }
+  }
+  getBookCount(){
+   return this.booksToDisplay.reduce((pv,cv)=>cv.books.length+pv,0);
   }
 
 }
